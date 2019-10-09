@@ -20,6 +20,9 @@
 		C4E21237234E4F4800553E71 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4E21236234E4F4800553E71 /* Router.swift */; };
 		C4E2123B234E58B200553E71 /* MovieDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4E2123A234E58B200553E71 /* MovieDTO.swift */; };
 		C4E2123D234E58BB00553E71 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4E2123C234E58BB00553E71 /* Movie.swift */; };
+		C4E21240234E5A4C00553E71 /* MovieService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4E2123F234E5A4C00553E71 /* MovieService.swift */; };
+		C4E21243234E5A7300553E71 /* MovieListDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4E21242234E5A7300553E71 /* MovieListDTO.swift */; };
+		C4E21245234E5B1300553E71 /* MovieList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4E21244234E5B1300553E71 /* MovieList.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +67,9 @@
 		C4E21236234E4F4800553E71 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		C4E2123A234E58B200553E71 /* MovieDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDTO.swift; sourceTree = "<group>"; };
 		C4E2123C234E58BB00553E71 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
+		C4E2123F234E5A4C00553E71 /* MovieService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieService.swift; sourceTree = "<group>"; };
+		C4E21242234E5A7300553E71 /* MovieListDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListDTO.swift; sourceTree = "<group>"; };
+		C4E21244234E5B1300553E71 /* MovieList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieList.swift; sourceTree = "<group>"; };
 		FA0B6A86F40E738C6F26DB83 /* Pods-MovieDiary-MovieDiaryUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieDiary-MovieDiaryUITests.release.xcconfig"; path = "Target Support Files/Pods-MovieDiary-MovieDiaryUITests/Pods-MovieDiary-MovieDiaryUITests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -130,6 +136,7 @@
 		C4E21204234E4E8700553E71 /* MovieDiary */ = {
 			isa = PBXGroup;
 			children = (
+				C4E2123E234E5A4000553E71 /* Services */,
 				C4E21238234E589900553E71 /* Models */,
 				C4E21235234E4F3E00553E71 /* Router */,
 				C4E21205234E4E8700553E71 /* AppDelegate.swift */,
@@ -171,6 +178,7 @@
 		C4E21238234E589900553E71 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				C4E21241234E5A6600553E71 /* MovieList */,
 				C4E21239234E58A900553E71 /* Movie */,
 			);
 			path = Models;
@@ -183,6 +191,23 @@
 				C4E2123C234E58BB00553E71 /* Movie.swift */,
 			);
 			path = Movie;
+			sourceTree = "<group>";
+		};
+		C4E2123E234E5A4000553E71 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				C4E2123F234E5A4C00553E71 /* MovieService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		C4E21241234E5A6600553E71 /* MovieList */ = {
+			isa = PBXGroup;
+			children = (
+				C4E21242234E5A7300553E71 /* MovieListDTO.swift */,
+				C4E21244234E5B1300553E71 /* MovieList.swift */,
+			);
+			path = MovieList;
 			sourceTree = "<group>";
 		};
 		FAA5A850935DC4824C6460B6 /* Pods */ = {
@@ -209,6 +234,7 @@
 				C4E211FE234E4E8700553E71 /* Sources */,
 				C4E211FF234E4E8700553E71 /* Frameworks */,
 				C4E21200234E4E8700553E71 /* Resources */,
+				4E378163D1B82CFABC205802 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -246,6 +272,7 @@
 				C4E2121F234E4E8F00553E71 /* Sources */,
 				C4E21220234E4E8F00553E71 /* Frameworks */,
 				C4E21221234E4E8F00553E71 /* Resources */,
+				3479021CCB5656690C5F7171 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -328,6 +355,40 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		3479021CCB5656690C5F7171 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MovieDiary-MovieDiaryUITests/Pods-MovieDiary-MovieDiaryUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MovieDiary-MovieDiaryUITests/Pods-MovieDiary-MovieDiaryUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MovieDiary-MovieDiaryUITests/Pods-MovieDiary-MovieDiaryUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4E378163D1B82CFABC205802 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MovieDiary/Pods-MovieDiary-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MovieDiary/Pods-MovieDiary-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MovieDiary/Pods-MovieDiary-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		54F4FBCA87D5AD686CACAC60 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -401,10 +462,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C4E21240234E5A4C00553E71 /* MovieService.swift in Sources */,
 				C4E2123B234E58B200553E71 /* MovieDTO.swift in Sources */,
 				C4E21237234E4F4800553E71 /* Router.swift in Sources */,
+				C4E21243234E5A7300553E71 /* MovieListDTO.swift in Sources */,
 				C4E2120A234E4E8700553E71 /* ViewController.swift in Sources */,
 				C4E21206234E4E8700553E71 /* AppDelegate.swift in Sources */,
+				C4E21245234E5B1300553E71 /* MovieList.swift in Sources */,
 				C4E2123D234E58BB00553E71 /* Movie.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
