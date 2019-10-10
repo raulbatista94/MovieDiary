@@ -12,8 +12,15 @@ struct MovieListDTO: Decodable {
     let totalPages: Int?
     
     enum CodingKeys: String, CodingKey {
-        case page = "page"
-        case results = "results"
+        case page
+        case results
         case totalPages = "total_pages"
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.page = try container.decode(Int.self, forKey: .page)
+        self.results = try container.decode([MovieDTO].self, forKey: .results)
+        self.totalPages = try container.decode(Int.self, forKey: .totalPages)
     }
 }

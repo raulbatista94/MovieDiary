@@ -19,4 +19,12 @@ struct MovieDTO: Decodable {
         case averageScore = "vote_average"
         case overview = "overview"
     }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.title = try container.decode(String.self, forKey: .title)
+        self.posterPath = try container.decode(String.self, forKey: .posterPath)
+        self.averageScore = try container.decode(Double.self, forKey: .overview)
+        self.overview = try container.decode(String.self, forKey: .overview)
+    }
 }
