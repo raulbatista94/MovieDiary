@@ -3,13 +3,14 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		38A69DB28CDB832062EBFAA0 /* Pods_MovieDiary_MovieDiaryUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B38AE18E24A457CA09875828 /* Pods_MovieDiary_MovieDiaryUITests.framework */; };
 		58DCBCDA88461E0DE1260831 /* Pods_MovieDiary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 914AFA699F45A77066E21EBC /* Pods_MovieDiary.framework */; };
 		C394722142281BCCDF40DC35 /* Pods_MovieDiaryTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3871D9821813901667BA52A7 /* Pods_MovieDiaryTests.framework */; };
+		C494FC9D234F4508007910F1 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C494FC9C234F4508007910F1 /* Constants.swift */; };
 		C4E21206234E4E8700553E71 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4E21205234E4E8700553E71 /* AppDelegate.swift */; };
 		C4E2120A234E4E8700553E71 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4E21209234E4E8700553E71 /* ViewController.swift */; };
 		C4E2120D234E4E8700553E71 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4E2120B234E4E8700553E71 /* Main.storyboard */; };
@@ -51,6 +52,7 @@
 		A1267BCF775CE8B07682F553 /* Pods-MovieDiary.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieDiary.debug.xcconfig"; path = "Target Support Files/Pods-MovieDiary/Pods-MovieDiary.debug.xcconfig"; sourceTree = "<group>"; };
 		B38AE18E24A457CA09875828 /* Pods_MovieDiary_MovieDiaryUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MovieDiary_MovieDiaryUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B74BDDD762793D3CD4854E47 /* Pods-MovieDiaryTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieDiaryTests.debug.xcconfig"; path = "Target Support Files/Pods-MovieDiaryTests/Pods-MovieDiaryTests.debug.xcconfig"; sourceTree = "<group>"; };
+		C494FC9C234F4508007910F1 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		C4E21202234E4E8700553E71 /* MovieDiary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieDiary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4E21205234E4E8700553E71 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C4E21209234E4E8700553E71 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -111,6 +113,13 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		C494FC9E234F4865007910F1 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		C4E211F9234E4E8700553E71 = {
 			isa = PBXGroup;
 			children = (
@@ -136,6 +145,7 @@
 		C4E21204234E4E8700553E71 /* MovieDiary */ = {
 			isa = PBXGroup;
 			children = (
+				C494FC9E234F4865007910F1 /* Utils */,
 				C4E2123E234E5A4000553E71 /* Services */,
 				C4E21238234E589900553E71 /* Models */,
 				C4E21235234E4F3E00553E71 /* Router */,
@@ -145,6 +155,7 @@
 				C4E2120E234E4E8E00553E71 /* Assets.xcassets */,
 				C4E21210234E4E8E00553E71 /* LaunchScreen.storyboard */,
 				C4E21213234E4E8E00553E71 /* Info.plist */,
+				C494FC9C234F4508007910F1 /* Constants.swift */,
 			);
 			path = MovieDiary;
 			sourceTree = "<group>";
@@ -470,6 +481,7 @@
 				C4E21206234E4E8700553E71 /* AppDelegate.swift in Sources */,
 				C4E21245234E5B1300553E71 /* MovieList.swift in Sources */,
 				C4E2123D234E58BB00553E71 /* Movie.swift in Sources */,
+				C494FC9D234F4508007910F1 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
