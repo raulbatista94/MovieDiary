@@ -10,6 +10,8 @@ target 'MovieDiary' do
   pod 'RxSwift', '~> 5'
   pod 'RxCocoa', '~> 5'
   pod 'Alamofire', '~> 4.0'
+  pod 'SnapKit'
+  pod 'Kingfisher'
 
   target 'MovieDiaryTests' do
     inherit! :search_paths

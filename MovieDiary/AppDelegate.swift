@@ -12,17 +12,12 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    // TODO(Add router here)
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
-        let window = UIWindow(frame: UIScreen.main.bounds)
+    private var router: Router?
 
-//        let router = MainRouter()
-//        let controller = router.entrypoint()
-        let entryController = UINavigationController(rootViewController: ViewController())
-        window.rootViewController = entryController
-        window.makeKeyAndVisible()
-        self.window = window
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        window = UIWindow(frame: UIScreen.main.bounds)
+        window?.makeKeyAndVisible()
+        router = Router(window: window!, dependencies: Dependencies())
         return true
     }
 }

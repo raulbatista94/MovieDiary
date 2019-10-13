@@ -8,10 +8,10 @@
 
 
 struct MovieDTO: Decodable {
-    let title: String?
-    let posterPath: String?
-    let averageScore: Double?
-    let overview: String?
+    let title: String
+    let posterPath: String
+    let averageScore: Double
+    let overview: String
     
     enum CodingKeys: String, CodingKey {
         case title = "original_title"
@@ -24,7 +24,7 @@ struct MovieDTO: Decodable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.title = try container.decode(String.self, forKey: .title)
         self.posterPath = try container.decode(String.self, forKey: .posterPath)
-        self.averageScore = try container.decode(Double.self, forKey: .overview)
+        self.averageScore = try container.decode(Double.self, forKey: .averageScore)
         self.overview = try container.decode(String.self, forKey: .overview)
     }
 }

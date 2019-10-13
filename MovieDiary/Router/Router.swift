@@ -7,22 +7,22 @@
 //
 
 import UIKit
+import Foundation
 
 class Router {
     private let window: UIWindow
+    private let dependencies: Dependencies
     
-    init(window: UIWindow) {
+    init(window: UIWindow, dependencies: Dependencies) {
         self.window = window
+        self.dependencies = dependencies
+
+        entryPoint()
     }
     
-    private func setupViews() {
-        #warning("This is just default UIViewController. Replace this with the first controller in App hierarchy.")
-        window.rootViewController = UIViewController()
+    private func entryPoint() {
+        let model = MovieListViewModel(dependencies: dependencies)
+        let controller = MovieListController(movieListViewModel: model, router: self)
+        window.rootViewController = UINavigationController(rootViewController: controller)
     }
-    
-//    /// Use this function to move to the detail controller for specific movie.
-//    /// - Parameter movie: Single object of type `Movie`.
-//    func showMovieDetail(movie: Movie) {
-//
-//    }
 }
