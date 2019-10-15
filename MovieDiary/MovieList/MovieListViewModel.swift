@@ -34,10 +34,10 @@ final class MovieListViewModel {
 
     }
 
-    func loadMovies() {
-        dependencies.movieService.getPopularMovies()
+    func loadMovies(searchQuery: String) {
+        dependencies.movieService.observeMovies(previouslyLoadedMovies: dataSource.movieList.value, searchQuery: searchQuery)
             .subscribe(onNext: { [weak self] movieList in
-                movieList.movieResults.forEach { self?.loadedMovies.append($0) }
+                self?.loadedMovies = movieList
                 self?.dataSource.movieList.accept(self?.loadedMovies ?? [])
             }, onError: { error in
                 assertionFailure("FAILED \(error.localizedDescription)")

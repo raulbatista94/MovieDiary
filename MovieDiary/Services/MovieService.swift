@@ -25,7 +25,7 @@ final class MovieService {
     // If possible get rid of this
     private var moviePage: Int = 1
     private let constants = Constants()
-    func getPopularMovies() -> Observable<MovieList> {
+    private func getPopularMovies() -> Observable<MovieList> {
         return Observable.create { emitter in
             request(self.constants.baseApiUrlString,
                     method: .get,
@@ -46,6 +46,21 @@ final class MovieService {
                 })
             return Disposables.create()
         }
+    }
+    
+    func observeMovies(previouslyLoadedMovies: [Movie], searchQuery: String?) -> Observable<[Movie]> {
+        let moviesResult = getPopularMovies()
+            .debounce(.milliseconds(200), scheduler: MainScheduler.instance)
+            .flatMapLatest { movieListDTO -> Observable<[Movie]> in
+            if searchQuery != "" {
+                return .just((previouslyLoadedMovies + movieListDTO.movieResults).filter { $0.title.localizedCaseInsensitiveContains(searchQuery!)})
+            } else {
+                return .just(previouslyLoadedMovies + movieListDTO.movieResults)
+            }
+        }
+        return moviesResult
+//        return Observable.concat(moviesResult,
+//                                 Observable.never().takeUntil(trigger))
     }
     
     private func movieList(from movieListDTO: MovieListDTO) -> MovieList {

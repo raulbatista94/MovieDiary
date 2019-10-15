@@ -17,13 +17,20 @@ class MovieListController: UITableViewController {
     private let disposeBag = DisposeBag()
     private let router: Router
     private let searchBar = UISearchBar(frame: .zero)
+//    var shouldLoadMoreData: Observable<Void> {
+//        return tableView.rx
+//            .contentOffset
+//            .map { $0.y }
+//            .filter { $0 < self.tableView.contentSize.height - self.tableView.frame.size.height }
+//            .map { _ in self.bind() }
+//    }
 
     init(movieListViewModel: MovieListViewModel, router: Router) {
         self.movieListViewModel = movieListViewModel
         self.router = router
         super.init(style: .plain)
         view = tableView
-        movieListViewModel.loadMovies()
+        movieListViewModel.loadMovies(searchQuery: "")
         tableView.register(MovieListCell.self, forCellReuseIdentifier: "cell")
         tableView.dataSource = self
         tableView.delegate = self
@@ -58,6 +65,13 @@ class MovieListController: UITableViewController {
         
         setNeedsStatusBarAppearanceUpdate()
     }
+    
+    override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        if ((scrollView.contentOffset.y + scrollView.frame.size.height) >= scrollView.contentSize.height) {
+            movieListViewModel.loadMovies(searchQuery: "")
+            bind()
+        }
+    }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -86,10 +100,21 @@ class MovieListController: UITableViewController {
         tableView.separatorStyle = .none
         navigationItem.titleView = searchBar
         
-//        searchBar.rx.text.asObservable()
-//            .flatMapLatest { queryText -> Completable in
-//
-//        }
+        searchBar.rx.text.asObservable()
+            .flatMapLatest { [weak self] queryText -> Observable<Void> in
+                // TODO() we should probably keep the previous results and disable the possibility of loading more movies when scrolling
+                let currentlyLoadedMovies = self?.movieListViewModel.dataSource.movieList.value
+                if queryText != "" {
+                    self?.movieListViewModel.dataSource.movieList.accept(currentlyLoadedMovies?.filter { $0.title.localizedCaseInsensitiveContains(queryText!)} ?? [])
+                } else {
+                    self?.movieListViewModel.dataSource.movieList.accept(currentlyLoadedMovies ?? [])
+                }
+                return .just(())
+        }
+        .subscribe(onNext: { [weak self] _ in
+            self?.tableView.reloadData()
+        })
+        .disposed(by: disposeBag)
     }
     
     override func viewDidLoad() {
