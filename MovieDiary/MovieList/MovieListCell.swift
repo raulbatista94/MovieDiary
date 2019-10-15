@@ -15,6 +15,7 @@ class MovieListCell: UITableViewCell {
     let movieImage = UIImageView()
     let averageScoreLabel = UILabel()
     let activityIndicator = UIActivityIndicatorView()
+    let gradientView = UIImageView(image: UIImage(named: "gradient"))
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .default, reuseIdentifier: "cell")
@@ -31,16 +32,24 @@ class MovieListCell: UITableViewCell {
     func addSubViews() {
         addSubview(activityIndicator)
         addSubview(movieImage)
+        addSubview(gradientView)
         addSubview(movieTitle)
         addSubview(averageScoreLabel)
     }
 
     func styleView() {
+        backgroundColor = .black
         movieTitle.textColor = .white
         movieTitle.font = UIFont.boldSystemFont(ofSize: 30)
+        movieTitle.numberOfLines = 0
+        
+        averageScoreLabel.textColor = .white
+        averageScoreLabel.font = UIFont.boldSystemFont(ofSize: 30)
+        
         movieImage.contentMode = .scaleAspectFill
         movieImage.layer.cornerRadius = 8
         movieImage.clipsToBounds = true
+        
         activityIndicator.style = .gray
     }
 
@@ -55,8 +64,22 @@ class MovieListCell: UITableViewCell {
         }
 
         movieTitle.snp.makeConstraints { make in
-            make.bottom.equalToSuperview().inset(16)
+            make.bottom.equalToSuperview().inset(25)
             make.leading.equalToSuperview().inset(16)
+        }
+        
+        gradientView.snp.makeConstraints { make in
+            make.top.bottom.equalTo(movieImage)
+            make.leading.trailing.equalTo(movieImage)
+        }
+        
+        averageScoreLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
+        averageScoreLabel.snp.makeConstraints { make in
+            make.bottom.equalTo(movieTitle)
+            make.leading.greaterThanOrEqualTo(movieTitle.snp.trailing).offset(15)
+            make.trailing.equalToSuperview().inset(16)
         }
     }
 }
+
+

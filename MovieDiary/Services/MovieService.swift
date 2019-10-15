@@ -29,17 +29,19 @@ final class MovieService {
         return Observable.create { emitter in
             request(self.constants.baseApiUrlString,
                     method: .get,
-                    parameters: ["api_key": self.constants.apiKey])
+                    parameters: ["api_key": self.constants.apiKey,
+                                 "page": self.moviePage])
                 .responseJSON(completionHandler: { response in
                     if let error = response.error {
                         emitter.onError(error)
                     } else if let data = response.data,
                         let movieListDTO = try? JSONDecoder().decode(MovieListDTO.self, from: data) {
                         // Increase the page to load next page
-                        self.moviePage += (movieListDTO.page ?? 0) + 1
+                        self.moviePage = (movieListDTO.page ?? 0) + 1
                         return emitter.onNext(self.movieList(from: movieListDTO))
                     } else {
                         assertionFailure("Failed to parse data. Check if all the keys and data types are correctly set.")
+                        
                     }
                 })
             return Disposables.create()

@@ -22,7 +22,7 @@ class Router {
     
     private func entryPoint() {
         let model = MovieListViewModel(dependencies: dependencies)
-        let controller = MovieListController(movieListViewModel: model, router: self)
-        window.rootViewController = UINavigationController(rootViewController: controller)
+        let controller = UINavigationController(rootViewController: MovieListController(movieListViewModel: model, router: self))
+        window.rootViewController = controller
     }
 }
