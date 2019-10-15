@@ -25,4 +25,9 @@ class Router {
         let controller = UINavigationController(rootViewController: MovieListController(movieListViewModel: model, router: self))
         window.rootViewController = controller
     }
+    
+    func movieDetail(movie: Movie, from controller: UINavigationController) {
+        let movieDetailController = UIViewController()
+        controller.pushViewController(movieDetailController, animated: true)
+    }
 }

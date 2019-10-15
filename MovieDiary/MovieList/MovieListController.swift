@@ -62,6 +62,11 @@ class MovieListController: UITableViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedMovie = movieListViewModel.dataSource.movieList.value[indexPath.row]
+        self.router.movieDetail(movie: selectedMovie, from: self.navigationController!)
+    }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return movieListViewModel.dataSource.movieList.value.count
