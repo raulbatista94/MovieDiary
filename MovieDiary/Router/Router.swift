@@ -28,6 +28,6 @@ class Router {
     
     func movieDetail(movie: Movie, from controller: UINavigationController) {
         let movieDetailController = UIViewController()
-        controller.pushViewController(movieDetailController, animated: true)
+        controller.pushViewController(movieDetailController, animated: false)
     }
 }

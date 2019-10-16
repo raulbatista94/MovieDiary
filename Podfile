@@ -12,6 +12,7 @@ target 'MovieDiary' do
   pod 'Alamofire', '~> 4.0'
   pod 'SnapKit'
   pod 'Kingfisher'
+  pod 'IQKeyboardManager'
 
   target 'MovieDiaryTests' do
     inherit! :search_paths

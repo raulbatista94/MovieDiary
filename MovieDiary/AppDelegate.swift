@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import IQKeyboardManager
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -18,6 +19,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
         router = Router(window: window!, dependencies: Dependencies())
+        
+        IQKeyboardManager.shared().isEnabled = true
+        IQKeyboardManager.shared().enabledTouchResignedClasses.add(MovieListController.self)
+        
         return true
     }
 }

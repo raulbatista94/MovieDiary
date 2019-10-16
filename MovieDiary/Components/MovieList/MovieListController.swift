@@ -17,13 +17,7 @@ class MovieListController: UITableViewController {
     private let disposeBag = DisposeBag()
     private let router: Router
     private let searchBar = UISearchBar(frame: .zero)
-//    var shouldLoadMoreData: Observable<Void> {
-//        return tableView.rx
-//            .contentOffset
-//            .map { $0.y }
-//            .filter { $0 < self.tableView.contentSize.height - self.tableView.frame.size.height }
-//            .map { _ in self.bind() }
-//    }
+    private var isSearchActive: Bool = false
 
     init(movieListViewModel: MovieListViewModel, router: Router) {
         self.movieListViewModel = movieListViewModel
@@ -67,7 +61,7 @@ class MovieListController: UITableViewController {
     }
     
     override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        if ((scrollView.contentOffset.y + scrollView.frame.size.height) >= scrollView.contentSize.height) {
+        if ((scrollView.contentOffset.y + scrollView.frame.size.height) >= scrollView.contentSize.height) && !isSearchActive {
             movieListViewModel.loadMovies(searchQuery: "")
             bind()
         }
@@ -102,12 +96,12 @@ class MovieListController: UITableViewController {
         
         searchBar.rx.text.asObservable()
             .flatMapLatest { [weak self] queryText -> Observable<Void> in
-                // TODO() we should probably keep the previous results and disable the possibility of loading more movies when scrolling
-                let currentlyLoadedMovies = self?.movieListViewModel.dataSource.movieList.value
                 if queryText != "" {
-                    self?.movieListViewModel.dataSource.movieList.accept(currentlyLoadedMovies?.filter { $0.title.localizedCaseInsensitiveContains(queryText!)} ?? [])
+                    self?.isSearchActive = true
+                    self?.movieListViewModel.dataSource.movieList.accept(self?.movieListViewModel.loadedMovies.filter { $0.title.localizedCaseInsensitiveContains(queryText!) } ?? [])
                 } else {
-                    self?.movieListViewModel.dataSource.movieList.accept(currentlyLoadedMovies ?? [])
+                    self?.isSearchActive = false
+                    self?.movieListViewModel.dataSource.movieList.accept(self?.movieListViewModel.loadedMovies ?? [])
                 }
                 return .just(())
         }
@@ -117,11 +111,6 @@ class MovieListController: UITableViewController {
         .disposed(by: disposeBag)
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.hideKeyboardWhenTappedAround()
-    }
-
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: MovieListCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! MovieListCell
         cell.movieTitle.text = self.movieListViewModel.dataSource.movieList.value[indexPath.row].title
@@ -130,18 +119,5 @@ class MovieListController: UITableViewController {
 
         cell.movieImage.kf.setImage(with: URL(string: imageUrl), placeholder: nil)
         return cell
-    }
-}
-
-
-extension UITableViewController {
-    func hideKeyboardWhenTappedAround() {
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UITableViewController.dismissKeyboard))
-        tap.cancelsTouchesInView = false
-        view.addGestureRecognizer(tap)
-    }
-
-    @objc func dismissKeyboard() {
-        view.endEditing(true)
     }
 }

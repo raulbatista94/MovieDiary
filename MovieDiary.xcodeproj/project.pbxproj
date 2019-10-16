@@ -148,6 +148,22 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
+		C4C550442356F3690074DBF1 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				C4C550452356F3760074DBF1 /* MovieDetail */,
+				C494FC9F234F5427007910F1 /* MovieList */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		C4C550452356F3760074DBF1 /* MovieDetail */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = MovieDetail;
+			sourceTree = "<group>";
+		};
 		C4E211F9234E4E8700553E71 = {
 			isa = PBXGroup;
 			children = (
@@ -173,8 +189,8 @@
 		C4E21204234E4E8700553E71 /* MovieDiary */ = {
 			isa = PBXGroup;
 			children = (
+				C4C550442356F3690074DBF1 /* Components */,
 				C494FCA2234F555C007910F1 /* Utils */,
-				C494FC9F234F5427007910F1 /* MovieList */,
 				C4E2123E234E5A4000553E71 /* Services */,
 				C4E21238234E589900553E71 /* Models */,
 				C4E21235234E4F3E00553E71 /* Router */,

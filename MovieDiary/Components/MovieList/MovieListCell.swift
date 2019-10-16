@@ -50,7 +50,7 @@ class MovieListCell: UITableViewCell {
         movieImage.layer.cornerRadius = 8
         movieImage.clipsToBounds = true
         
-        activityIndicator.style = .gray
+        activityIndicator.style = .whiteLarge
     }
 
     func setupViewConstraints() {

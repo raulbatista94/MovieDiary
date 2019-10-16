@@ -21,8 +21,8 @@ final class MovieListViewModel {
         let movieList = BehaviorRelay<[Movie]>(value: [])
     }
 
-    /// This variable will be used for pagination. Every new result will be apended to this
-    private var loadedMovies: [Movie] = []
+    /// This variable is used for search and filtering
+    var loadedMovies: [Movie] = []
     let dataSource: DataSource
     let dependencies: MovieListDependencies
 
