@@ -12,11 +12,10 @@ import RxSwift
 class BaseView: UIView {
 
     override init(frame: CGRect) {
-        super.init(frame: .zero)
-
-        addSubViews()
-        setupViewConstraints()
+        super.init(frame: frame)
+        prepareSubviews()
         styleViews()
+        setupViewConstraints()
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -25,12 +24,12 @@ class BaseView: UIView {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        styleViews()
+        prepareSubviews()
+        setupViewConstraints()
     }
 
-    func addSubViews() { }
-
-    func setupViewConstraints() { }
-
+    func prepareSubviews() { }
     func styleViews() { }
+    func setupViewConstraints() {}
+
 }

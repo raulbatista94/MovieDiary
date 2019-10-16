@@ -9,28 +9,32 @@
 import UIKit
 import RxSwift
 
-open class BaseViewController: UIViewController {
+open class BaseViewController<VIEW: UIView>: UIViewController {
     public let disposeBag = DisposeBag()
-
+    public let contentView: VIEW
+    
     override open func viewDidLoad() {
         super.viewDidLoad()
     }
-
-
-    public init(contentView: UIView) {
+    
+    public init() {
+        contentView = VIEW()
         super.init(nibName: nil, bundle: nil)
-        self.view = contentView
+        view = contentView
     }
-
-    public init(contentView: UIView, title: String? = nil) {
+    
+    public init(title: String? = nil) {
+        contentView = VIEW()
         super.init(nibName: nil, bundle: nil)
-        self.view = contentView
-        self.title = title
+        view = contentView
+        navigationItem.title = title
     }
 
     @available(*, unavailable)
     public required init?(coder aDecoder: NSCoder) {
+        contentView = VIEW()
         super.init(coder: aDecoder)
+        view = contentView
     }
 
     open override func viewWillAppear(_ animated: Bool) {

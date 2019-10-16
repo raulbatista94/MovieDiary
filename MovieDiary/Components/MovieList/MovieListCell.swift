@@ -19,6 +19,7 @@ class MovieListCell: UITableViewCell {
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .default, reuseIdentifier: "cell")
+        selectionStyle = .none
         activityIndicator.startAnimating()
         addSubViews()
         setupViewConstraints()

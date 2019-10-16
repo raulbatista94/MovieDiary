@@ -12,7 +12,7 @@ import Foundation
 
 enum MovieServiceError: LocalizedError {
     case noDataReceived
-
+    
     var errorDescription: String? {
         switch self {
         case .noDataReceived:
@@ -48,19 +48,12 @@ final class MovieService {
         }
     }
     
-    func observeMovies(previouslyLoadedMovies: [Movie], searchQuery: String?) -> Observable<[Movie]> {
-        let moviesResult = getPopularMovies()
+    func observeMovies(previouslyLoadedMovies: [Movie]) -> Observable<[Movie]> {
+        getPopularMovies()
             .debounce(.milliseconds(200), scheduler: MainScheduler.instance)
             .flatMapLatest { movieListDTO -> Observable<[Movie]> in
-            if searchQuery != "" {
-                return .just((previouslyLoadedMovies + movieListDTO.movieResults).filter { $0.title.localizedCaseInsensitiveContains(searchQuery!)})
-            } else {
                 return .just(previouslyLoadedMovies + movieListDTO.movieResults)
-            }
         }
-        return moviesResult
-//        return Observable.concat(moviesResult,
-//                                 Observable.never().takeUntil(trigger))
     }
     
     private func movieList(from movieListDTO: MovieListDTO) -> MovieList {
@@ -68,7 +61,7 @@ final class MovieService {
                          movieResults: movieListDTO.results.map { self.movie(from: $0) },
                          totalPages: movieListDTO.totalPages ?? 0)
     }
-
+    
     private func movie(from movieDTO: MovieDTO) -> Movie {
         return Movie(title: movieDTO.title,
                      posterPath: movieDTO.posterPath,

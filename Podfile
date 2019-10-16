@@ -13,6 +13,7 @@ target 'MovieDiary' do
   pod 'SnapKit'
   pod 'Kingfisher'
   pod 'IQKeyboardManager'
+  pod 'JGProgressHUD'
 
   target 'MovieDiaryTests' do
     inherit! :search_paths

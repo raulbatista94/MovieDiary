@@ -21,7 +21,7 @@ final class MovieListViewModel {
         let movieList = BehaviorRelay<[Movie]>(value: [])
     }
 
-    /// This variable is used for search and filtering
+    /// This variable is used for search and filtering since we are filtering only from already loaded movies.
     var loadedMovies: [Movie] = []
     let dataSource: DataSource
     let dependencies: MovieListDependencies
@@ -34,13 +34,14 @@ final class MovieListViewModel {
 
     }
 
-    func loadMovies(searchQuery: String) {
-        dependencies.movieService.observeMovies(previouslyLoadedMovies: dataSource.movieList.value, searchQuery: searchQuery)
+    func loadMovies() {
+        dependencies.movieService.observeMovies(previouslyLoadedMovies: dataSource.movieList.value)
+            .retry(3)
             .subscribe(onNext: { [weak self] movieList in
                 self?.loadedMovies = movieList
                 self?.dataSource.movieList.accept(self?.loadedMovies ?? [])
             }, onError: { error in
-                assertionFailure("FAILED \(error.localizedDescription)")
+                errorIndicator.onNext(error.localizedDescription)
             })
             .disposed(by: disposeBag)
     }

@@ -24,7 +24,7 @@ class MovieListController: UITableViewController {
         self.router = router
         super.init(style: .plain)
         view = tableView
-        movieListViewModel.loadMovies(searchQuery: "")
+        movieListViewModel.loadMovies()
         tableView.register(MovieListCell.self, forCellReuseIdentifier: "cell")
         tableView.dataSource = self
         tableView.delegate = self
@@ -41,10 +41,14 @@ class MovieListController: UITableViewController {
 
     func bind() {
         movieListViewModel.dataSource.movieList
-            .subscribe(onNext: { [weak self] data in
-                print(data)
-                self?.tableView.reloadData()
-        })
+            .retry()
+            .subscribe(
+                onNext: { [weak self] data in
+                    self?.tableView.reloadData()
+                },
+                onError: { _ in
+                    self.router.showErrorAlert(from: self.navigationController!)
+                })
             .disposed(by: disposeBag)
     }
     
@@ -62,7 +66,7 @@ class MovieListController: UITableViewController {
     
     override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         if ((scrollView.contentOffset.y + scrollView.frame.size.height) >= scrollView.contentSize.height) && !isSearchActive {
-            movieListViewModel.loadMovies(searchQuery: "")
+            movieListViewModel.loadMovies()
             bind()
         }
     }

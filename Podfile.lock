@@ -1,6 +1,7 @@
 PODS:
   - Alamofire (4.9.0)
   - IQKeyboardManager (6.5.0)
+  - JGProgressHUD (2.1)
   - Kingfisher (4.10.1)
   - RxCocoa (5.0.0):
     - RxRelay (~> 5)
@@ -13,6 +14,7 @@ PODS:
 DEPENDENCIES:
   - Alamofire (~> 4.0)
   - IQKeyboardManager
+  - JGProgressHUD
   - Kingfisher
   - RxCocoa (~> 5)
   - RxSwift (~> 5)
@@ -28,16 +30,18 @@ SPEC REPOS:
     - SnapKit
   trunk:
     - IQKeyboardManager
+    - JGProgressHUD
 
 SPEC CHECKSUMS:
   Alamofire: afc3e7c6db61476cb45cdd23fed06bad03bbc321
   IQKeyboardManager: 700e5155d6a292383b54e8678aec769e14fc78fc
+  JGProgressHUD: aa403e9a5b45cae98903c4600cccdd98c0c3ec90
   Kingfisher: c148cd7b47ebde9989f6bc7c27dcaa79d81279a0
   RxCocoa: fcf32050ac00d801f34a7f71d5e8e7f23026dcd8
   RxRelay: 4f7409406a51a55cd88483f21ed898c234d60f18
   RxSwift: 8b0671caa829a763bbce7271095859121cbd895f
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
 
-PODFILE CHECKSUM: 9d9bd928a30b49fd05dcc828cc3971795c9bb49b
+PODFILE CHECKSUM: 261aa915c8aa4d99e2db5ba317bb170f0358907d
 
 COCOAPODS: 1.8.3

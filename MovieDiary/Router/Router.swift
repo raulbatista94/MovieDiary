@@ -27,7 +27,14 @@ class Router {
     }
     
     func movieDetail(movie: Movie, from controller: UINavigationController) {
-        let movieDetailController = UIViewController()
+        let movieDetailViewModel = MovieDetailViewModel(movie: movie)
+        let movieDetailController = MovieDetailController(movieDetailViewModel: movieDetailViewModel, router: self)
         controller.pushViewController(movieDetailController, animated: false)
+    }
+    
+    func showErrorAlert(from controller: UINavigationController) {
+        let alertDialog = UIAlertController(title: "Error", message: "Failed to perform your request. Please check your internet connection and try again.", preferredStyle: .alert)
+        alertDialog.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        controller.present(alertDialog, animated: true, completion: nil)
     }
 }
