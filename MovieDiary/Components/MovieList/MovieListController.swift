@@ -70,7 +70,7 @@ class MovieListController: UITableViewController {
             bind()
         }
     }
-
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -119,7 +119,7 @@ class MovieListController: UITableViewController {
         let cell: MovieListCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! MovieListCell
         cell.movieTitle.text = self.movieListViewModel.dataSource.movieList.value[indexPath.row].title
         cell.averageScoreLabel.text = String(self.movieListViewModel.dataSource.movieList.value[indexPath.row].averageScore)
-        let imageUrl = "https://image.tmdb.org/t/p/w342" + self.movieListViewModel.dataSource.movieList.value[indexPath.row].posterPath
+        let imageUrl = Constants.baseImagesUrlString + self.movieListViewModel.dataSource.movieList.value[indexPath.row].cellImagePath
 
         cell.movieImage.kf.setImage(with: URL(string: imageUrl), placeholder: nil)
         return cell

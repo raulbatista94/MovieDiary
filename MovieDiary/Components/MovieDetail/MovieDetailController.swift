@@ -23,10 +23,12 @@ final class MovieDetailController: BaseViewController<MovieDetailView> {
     private func bind() {
         movieDetailViewModel.dataSource.movie
             .subscribe(onNext: { [weak self] movie in
-                guard let movie = movie else { return }
-                let imageUrl = "https://image.tmdb.org/t/p/w342" + movie.posterPath
-                self?.contentView.movieImagePoster.kf.setImage(with: URL(string: imageUrl))
-                self?.contentView.movieDescriptionLabel.text = movie.overview
+                guard let self = self,
+                    let movie = movie else { return }
+                let imageUrl = Constants.baseImagesUrlString + movie.posterPath
+                self.contentView.movieImagePoster.kf.setImage(with: URL(string: imageUrl))
+                self.contentView.movieDescriptionLabel.text = movie.overview
+                self.contentView.movieTitleLabel.text = movie.title
                 
             }).disposed(by: disposeBag)
     }

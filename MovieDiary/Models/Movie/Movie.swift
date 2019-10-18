@@ -10,6 +10,7 @@ import UIKit
 struct Movie {
     let title: String
     let posterPath: String
+    let cellImagePath: String
     let averageScore: Double
     let overview: String
 }

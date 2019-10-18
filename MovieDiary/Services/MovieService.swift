@@ -24,12 +24,11 @@ enum MovieServiceError: LocalizedError {
 final class MovieService {
     // If possible get rid of this
     private var moviePage: Int = 1
-    private let constants = Constants()
     private func getPopularMovies() -> Observable<MovieList> {
         return Observable.create { emitter in
-            request(self.constants.baseApiUrlString,
+            request(Constants.baseApiUrlString,
                     method: .get,
-                    parameters: ["api_key": self.constants.apiKey,
+                    parameters: ["api_key": Constants.apiKey,
                                  "page": self.moviePage])
                 .responseJSON(completionHandler: { response in
                     if let error = response.error {
@@ -65,6 +64,7 @@ final class MovieService {
     private func movie(from movieDTO: MovieDTO) -> Movie {
         return Movie(title: movieDTO.title,
                      posterPath: movieDTO.posterPath,
+                     cellImagePath: movieDTO.cellImagePath ?? movieDTO.posterPath, // This is intentional to avoid empty cell images.
                      averageScore: movieDTO.averageScore,
                      overview: movieDTO.overview)
     }
