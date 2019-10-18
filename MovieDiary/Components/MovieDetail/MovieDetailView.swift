@@ -12,11 +12,13 @@ final class MovieDetailView: BaseView {
     let movieImagePoster = UIImageView()
     let movieDescriptionLabel = UILabel()
     let movieTitleLabel = UILabel()
+    let playButton = UIButton()
     
     override func prepareSubviews() {
         addSubview(movieTitleLabel)
         addSubview(movieImagePoster)
         addSubview(movieDescriptionLabel)
+        addSubview(playButton)
     }
     
     override func styleViews() {
@@ -26,6 +28,12 @@ final class MovieDetailView: BaseView {
         
         movieTitleLabel.font = UIFont.boldSystemFont(ofSize: 44)
         movieTitleLabel.numberOfLines = 0
+        
+        playButton.titleLabel?.text = "Play Trailer"
+        playButton.titleLabel?.textColor = .white
+        playButton.layer.cornerRadius = 4
+        playButton.clipsToBounds = true
+        playButton.backgroundColor = UIColor(red: 135.0, green: 37.0, blue: 30.0, alpha: 1.0)
     }
     
     override func setupViewConstraints() {
@@ -63,6 +71,13 @@ final class MovieDetailView: BaseView {
             } else {
                 make.trailing.equalToSuperview().inset(16)
             }
+            
+        }
+        
+        playButton.snp.makeConstraints { make in
+            make.top.equalTo(movieDescriptionLabel.snp.bottom).offset(18)
+            make.leading.trailing.equalToSuperview().inset(16)
+            make.height.equalTo(50)
             make.bottom.lessThanOrEqualToSuperview()
         }
     }

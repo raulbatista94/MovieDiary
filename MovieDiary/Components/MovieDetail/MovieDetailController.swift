@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import AVKit
+import XCDYouTubeKit
 
 final class MovieDetailController: BaseViewController<MovieDetailView> {
     private let movieDetailViewModel: MovieDetailViewModel
@@ -31,6 +33,11 @@ final class MovieDetailController: BaseViewController<MovieDetailView> {
                 self.contentView.movieTitleLabel.text = movie.title
                 
             }).disposed(by: disposeBag)
+        contentView.playButton.rx.tap
+            .subscribe(onNext: { [weak self] _ in
+                self?.playVideo()
+            })
+        .disposed(by: disposeBag)
     }
         
     override func viewWillAppear(_ animated: Bool) {
@@ -38,4 +45,35 @@ final class MovieDetailController: BaseViewController<MovieDetailView> {
         let textAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         navigationController?.navigationBar.titleTextAttributes = textAttributes
     }
+    
+    private func playVideo() {
+
+        let playerViewController = AVPlayerViewController()
+        self.present(playerViewController, animated: true, completion: nil)
+        
+
+        XCDYouTubeClient.default().getVideoWithIdentifier("t433PEQGErc") { (video: XCDYouTubeVideo?, error: Error?) in
+            if let error = error {
+                errorIndicator.onNext(error.localizedDescription)
+            } else if let streamURL = video?.streamURLs[XCDYouTubeVideoQuality.medium360.rawValue] {
+                playerViewController.player = AVPlayer(url: streamURL)
+            } else {
+                self.dismiss(animated: true, completion: nil)
+            }
+        }
+    }
+    
 }
+
+//func playVideo(videoIdentifier: String?) {
+//    let playerViewController = AVPlayerViewController()
+//    self.present(playerViewController, animated: true, completion: nil)
+//
+//    XCDYouTubeClient.default().getVideoWithIdentifier(videoIdentifier) { [weak playerViewController] (video: XCDYouTubeVideo?, error: Error?) in
+//        if let streamURLs = video?.streamURLs, let streamURL = (streamURLs[XCDYouTubeVideoQualityHTTPLiveStreaming] ?? streamURLs[YouTubeVideoQuality.hd720] ?? streamURLs[YouTubeVideoQuality.medium360] ?? streamURLs[YouTubeVideoQuality.small240]) {
+//            playerViewController?.player = AVPlayer(url: streamURL)
+//        } else {
+//            self.dismiss(animated: true, completion: nil)
+//        }
+//    }
+//}
