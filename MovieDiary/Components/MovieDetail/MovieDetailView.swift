@@ -23,6 +23,9 @@ final class MovieDetailView: BaseView {
         movieImagePoster.contentMode = .scaleAspectFit
         movieDescriptionLabel.textColor = .white
         movieDescriptionLabel.numberOfLines = 0
+        
+        movieTitleLabel.font = UIFont.boldSystemFont(ofSize: 44)
+        movieTitleLabel.numberOfLines = 0
     }
     
     override func setupViewConstraints() {
@@ -44,17 +47,22 @@ final class MovieDetailView: BaseView {
         movieTitleLabel.snp.makeConstraints { make in
             if #available(iOS 11.0, *) {
                 make.top.equalTo(safeAreaLayoutGuide).inset(10)
+                make.trailing.equalTo(safeAreaLayoutGuide).inset(16)
             } else {
                 make.top.equalToSuperview().inset(30)
+                make.trailing.equalToSuperview().inset(16)
             }
             make.leading.equalTo(movieImagePoster.snp.trailing).offset(16)
-            make.trailing.equalToSuperview().inset(16)
         }
         
         movieDescriptionLabel.snp.makeConstraints { make in
             make.top.equalTo(movieTitleLabel.snp.bottom).offset(15)
             make.leading.equalTo(movieImagePoster.snp.trailing).offset(16)
-            make.trailing.equalToSuperview().inset(16)
+            if #available(iOS 11.0, *) {
+                make.trailing.equalTo(safeAreaLayoutGuide).inset(16)
+            } else {
+                make.trailing.equalToSuperview().inset(16)
+            }
             make.bottom.lessThanOrEqualToSuperview()
         }
     }

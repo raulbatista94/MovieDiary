@@ -18,12 +18,14 @@ class MovieListController: UITableViewController {
     private let router: Router
     private let searchBar = UISearchBar(frame: .zero)
     private var isSearchActive: Bool = false
+    private let activityIndicator = UIActivityIndicatorView(style: .whiteLarge)
 
     init(movieListViewModel: MovieListViewModel, router: Router) {
         self.movieListViewModel = movieListViewModel
         self.router = router
         super.init(style: .plain)
         view = tableView
+        activityIndicator.startAnimating()
         movieListViewModel.loadMovies()
         tableView.register(MovieListCell.self, forCellReuseIdentifier: "cell")
         tableView.dataSource = self
@@ -31,14 +33,6 @@ class MovieListController: UITableViewController {
         bind()
     }
     
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
-    }
-    
-    override var prefersStatusBarHidden: Bool {
-        return false
-    }
-
     func bind() {
         movieListViewModel.dataSource.movieList
             .retry()
@@ -54,14 +48,15 @@ class MovieListController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        view.addSubview(activityIndicator)
         searchBar.tintColor = .darkGray
         searchBar.placeholder = "Type movie title... "
         searchBar.barTintColor = .black
         navigationController?.navigationBar.barTintColor = .black
         navigationController?.navigationBar.tintColor = .white
         
-        setNeedsStatusBarAppearanceUpdate()
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.center = view.center
     }
     
     override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
@@ -122,6 +117,7 @@ class MovieListController: UITableViewController {
         let imageUrl = Constants.baseImagesUrlString + self.movieListViewModel.dataSource.movieList.value[indexPath.row].cellImagePath
 
         cell.movieImage.kf.setImage(with: URL(string: imageUrl), placeholder: nil)
+        activityIndicator.stopAnimating()
         return cell
     }
 }
