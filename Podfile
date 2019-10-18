@@ -14,6 +14,7 @@ target 'MovieDiary' do
   pod 'Kingfisher'
   pod 'IQKeyboardManager'
   pod 'JGProgressHUD'
+  pod "XCDYouTubeKit", "~> 2.8"
 
   target 'MovieDiaryTests' do
     inherit! :search_paths

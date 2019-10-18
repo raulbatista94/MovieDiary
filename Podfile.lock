@@ -10,6 +10,7 @@ PODS:
     - RxSwift (~> 5)
   - RxSwift (5.0.0)
   - SnapKit (4.2.0)
+  - XCDYouTubeKit (2.8.1)
 
 DEPENDENCIES:
   - Alamofire (~> 4.0)
@@ -19,6 +20,7 @@ DEPENDENCIES:
   - RxCocoa (~> 5)
   - RxSwift (~> 5)
   - SnapKit
+  - XCDYouTubeKit (~> 2.8)
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
@@ -31,6 +33,7 @@ SPEC REPOS:
   trunk:
     - IQKeyboardManager
     - JGProgressHUD
+    - XCDYouTubeKit
 
 SPEC CHECKSUMS:
   Alamofire: afc3e7c6db61476cb45cdd23fed06bad03bbc321
@@ -41,7 +44,8 @@ SPEC CHECKSUMS:
   RxRelay: 4f7409406a51a55cd88483f21ed898c234d60f18
   RxSwift: 8b0671caa829a763bbce7271095859121cbd895f
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
+  XCDYouTubeKit: 4ca4e3322fa556ec1c32932d378365c15ce1386e
 
-PODFILE CHECKSUM: 261aa915c8aa4d99e2db5ba317bb170f0358907d
+PODFILE CHECKSUM: 9135eeee37fc47be382ac93c5c421e402738871e
 
 COCOAPODS: 1.8.3
