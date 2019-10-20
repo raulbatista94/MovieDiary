@@ -61,8 +61,12 @@ class MovieListController: UITableViewController {
     
     override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         if ((scrollView.contentOffset.y + scrollView.frame.size.height) >= scrollView.contentSize.height) && !isSearchActive {
+            let lastIndexPath = IndexPath(row: movieListViewModel.loadedMovies.count - 1, section: 0)
             movieListViewModel.loadMovies()
             bind()
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(300)) { [weak self] in
+                self?.tableView.scrollToRow(at: lastIndexPath, at: .bottom, animated: false)
+            }
         }
     }
     

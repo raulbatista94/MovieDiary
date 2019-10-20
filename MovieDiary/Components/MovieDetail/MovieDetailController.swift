@@ -50,30 +50,24 @@ final class MovieDetailController: BaseViewController<MovieDetailView> {
 
         let playerViewController = AVPlayerViewController()
         self.present(playerViewController, animated: true, completion: nil)
-        
 
         XCDYouTubeClient.default().getVideoWithIdentifier("t433PEQGErc") { (video: XCDYouTubeVideo?, error: Error?) in
             if let error = error {
                 errorIndicator.onNext(error.localizedDescription)
             } else if let streamURL = video?.streamURLs[XCDYouTubeVideoQuality.medium360.rawValue] {
                 playerViewController.player = AVPlayer(url: streamURL)
+                NotificationCenter.default.addObserver(self, selector: Selector(("dismissController:")),
+                                                       name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: playerViewController.player?.currentItem)
+                playerViewController.player?.play()
+                
             } else {
-                self.dismiss(animated: true, completion: nil)
+                dismissController()
             }
+        }
+        
+        func dismissController() {
+            self.dismiss(animated: true, completion: nil)
         }
     }
     
 }
-
-//func playVideo(videoIdentifier: String?) {
-//    let playerViewController = AVPlayerViewController()
-//    self.present(playerViewController, animated: true, completion: nil)
-//
-//    XCDYouTubeClient.default().getVideoWithIdentifier(videoIdentifier) { [weak playerViewController] (video: XCDYouTubeVideo?, error: Error?) in
-//        if let streamURLs = video?.streamURLs, let streamURL = (streamURLs[XCDYouTubeVideoQualityHTTPLiveStreaming] ?? streamURLs[YouTubeVideoQuality.hd720] ?? streamURLs[YouTubeVideoQuality.medium360] ?? streamURLs[YouTubeVideoQuality.small240]) {
-//            playerViewController?.player = AVPlayer(url: streamURL)
-//        } else {
-//            self.dismiss(animated: true, completion: nil)
-//        }
-//    }
-//}

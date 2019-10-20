@@ -33,7 +33,7 @@ final class MovieDetailView: BaseView {
         playButton.titleLabel?.textColor = .white
         playButton.layer.cornerRadius = 4
         playButton.clipsToBounds = true
-        playButton.backgroundColor = UIColor(red: 135.0, green: 37.0, blue: 30.0, alpha: 1.0)
+        playButton.backgroundColor = UIColor(red: 163, green: 28.0, blue: 55, alpha: 1.0)
     }
     
     override func setupViewConstraints() {

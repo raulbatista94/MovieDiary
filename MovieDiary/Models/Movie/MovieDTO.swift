@@ -8,6 +8,7 @@
 
 
 struct MovieDTO: Decodable {
+    let id: Int
     let title: String
     let posterPath: String
     let cellImagePath: String?
@@ -15,6 +16,7 @@ struct MovieDTO: Decodable {
     let overview: String
     
     enum CodingKeys: String, CodingKey {
+        case id
         case title = "original_title"
         case posterPath = "poster_path"
         case cellImagePath = "backdrop_path"
@@ -24,6 +26,7 @@ struct MovieDTO: Decodable {
 
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.id = try container.decode(Int.self, forKey: .id)
         self.title = try container.decode(String.self, forKey: .title)
         self.posterPath = try container.decode(String.self, forKey: .posterPath)
         self.cellImagePath = try? container.decode(String.self, forKey: .cellImagePath)
