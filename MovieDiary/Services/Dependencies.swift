@@ -8,8 +8,13 @@
 
 import Foundation
 
-class Dependencies {
+class Dependencies: MovieListDependencies {
     lazy var movieService: MovieService = {
         return MovieService()
     }()
+}
+
+/// Used to provide only the necessary dependencies to ViewModels.
+protocol MovieListDependencies {
+    var movieService: MovieService { get }
 }

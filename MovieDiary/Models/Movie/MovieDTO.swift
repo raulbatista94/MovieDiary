@@ -14,6 +14,7 @@ struct MovieDTO: Decodable {
     let cellImagePath: String?
     let averageScore: Double
     let overview: String
+    let genreIds: [Int]
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -22,6 +23,7 @@ struct MovieDTO: Decodable {
         case cellImagePath = "backdrop_path"
         case averageScore = "vote_average"
         case overview = "overview"
+        case genreIds = "genre_ids"
     }
 
     init(from decoder: Decoder) throws {
@@ -32,5 +34,6 @@ struct MovieDTO: Decodable {
         self.cellImagePath = try? container.decode(String.self, forKey: .cellImagePath)
         self.averageScore = try container.decode(Double.self, forKey: .averageScore)
         self.overview = try container.decode(String.self, forKey: .overview)
+        self.genreIds = try container.decode([Int].self, forKey: .genreIds)
     }
 }

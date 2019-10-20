@@ -11,6 +11,11 @@
 		58DCBCDA88461E0DE1260831 /* Pods_MovieDiary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 914AFA699F45A77066E21EBC /* Pods_MovieDiary.framework */; };
 		C394722142281BCCDF40DC35 /* Pods_MovieDiaryTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3871D9821813901667BA52A7 /* Pods_MovieDiaryTests.framework */; };
 		C43C0E1E235A3D1A00D5CD86 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C43C0E1D235A3D1A00D5CD86 /* Assets.xcassets */; };
+		C43C0E24235C61C900D5CD86 /* MovieTrailerDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43C0E23235C61C900D5CD86 /* MovieTrailerDTO.swift */; };
+		C43C0E26235C677500D5CD86 /* MovieTrailer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43C0E25235C677500D5CD86 /* MovieTrailer.swift */; };
+		C43C0E28235CAA5500D5CD86 /* UIColor+RGB.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43C0E27235CAA5500D5CD86 /* UIColor+RGB.swift */; };
+		C43C0E2B235CB7A600D5CD86 /* MovieGenreDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43C0E2A235CB7A600D5CD86 /* MovieGenreDTO.swift */; };
+		C43C0E2D235CB84C00D5CD86 /* MovieGenre.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43C0E2C235CB84C00D5CD86 /* MovieGenre.swift */; };
 		C47384D42357CFF70028650F /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47384D32357CFF70028650F /* ActivityIndicator.swift */; };
 		C494FC9D234F4508007910F1 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C494FC9C234F4508007910F1 /* Constants.swift */; };
 		C494FCA1234F5480007910F1 /* MovieListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C494FCA0234F5480007910F1 /* MovieListController.swift */; };
@@ -61,6 +66,11 @@
 		B38AE18E24A457CA09875828 /* Pods_MovieDiary_MovieDiaryUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MovieDiary_MovieDiaryUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B74BDDD762793D3CD4854E47 /* Pods-MovieDiaryTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieDiaryTests.debug.xcconfig"; path = "Target Support Files/Pods-MovieDiaryTests/Pods-MovieDiaryTests.debug.xcconfig"; sourceTree = "<group>"; };
 		C43C0E1D235A3D1A00D5CD86 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		C43C0E23235C61C900D5CD86 /* MovieTrailerDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieTrailerDTO.swift; sourceTree = "<group>"; };
+		C43C0E25235C677500D5CD86 /* MovieTrailer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieTrailer.swift; sourceTree = "<group>"; };
+		C43C0E27235CAA5500D5CD86 /* UIColor+RGB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+RGB.swift"; sourceTree = "<group>"; };
+		C43C0E2A235CB7A600D5CD86 /* MovieGenreDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieGenreDTO.swift; sourceTree = "<group>"; };
+		C43C0E2C235CB84C00D5CD86 /* MovieGenre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieGenre.swift; sourceTree = "<group>"; };
 		C47384D32357CFF70028650F /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
 		C494FC9C234F4508007910F1 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		C494FCA0234F5480007910F1 /* MovieListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListController.swift; sourceTree = "<group>"; };
@@ -129,6 +139,24 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		C43C0E22235C61B100D5CD86 /* MovieTrailer */ = {
+			isa = PBXGroup;
+			children = (
+				C43C0E23235C61C900D5CD86 /* MovieTrailerDTO.swift */,
+				C43C0E25235C677500D5CD86 /* MovieTrailer.swift */,
+			);
+			path = MovieTrailer;
+			sourceTree = "<group>";
+		};
+		C43C0E29235CB79100D5CD86 /* MovieGenre */ = {
+			isa = PBXGroup;
+			children = (
+				C43C0E2A235CB7A600D5CD86 /* MovieGenreDTO.swift */,
+				C43C0E2C235CB84C00D5CD86 /* MovieGenre.swift */,
+			);
+			path = MovieGenre;
+			sourceTree = "<group>";
+		};
 		C494FC9F234F5427007910F1 /* MovieList */ = {
 			isa = PBXGroup;
 			children = (
@@ -145,6 +173,7 @@
 				C494FCA3234F556E007910F1 /* BaseViewController.swift */,
 				C494FCA5234F5661007910F1 /* BaseView.swift */,
 				C47384D32357CFF70028650F /* ActivityIndicator.swift */,
+				C43C0E27235CAA5500D5CD86 /* UIColor+RGB.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -245,6 +274,8 @@
 		C4E21239234E58A900553E71 /* Movie */ = {
 			isa = PBXGroup;
 			children = (
+				C43C0E29235CB79100D5CD86 /* MovieGenre */,
+				C43C0E22235C61B100D5CD86 /* MovieTrailer */,
 				C4E2123A234E58B200553E71 /* MovieDTO.swift */,
 				C4E2123C234E58BB00553E71 /* Movie.swift */,
 			);
@@ -520,6 +551,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C43C0E2D235CB84C00D5CD86 /* MovieGenre.swift in Sources */,
+				C43C0E26235C677500D5CD86 /* MovieTrailer.swift in Sources */,
+				C43C0E28235CAA5500D5CD86 /* UIColor+RGB.swift in Sources */,
 				C4F28A5823521E49000FF1A8 /* Dependencies.swift in Sources */,
 				C4E21240234E5A4C00553E71 /* MovieService.swift in Sources */,
 				C4E2123B234E58B200553E71 /* MovieDTO.swift in Sources */,
@@ -534,6 +568,8 @@
 				C4E21245234E5B1300553E71 /* MovieList.swift in Sources */,
 				C4E2123D234E58BB00553E71 /* Movie.swift in Sources */,
 				C494FCA4234F556E007910F1 /* BaseViewController.swift in Sources */,
+				C43C0E2B235CB7A600D5CD86 /* MovieGenreDTO.swift in Sources */,
+				C43C0E24235C61C900D5CD86 /* MovieTrailerDTO.swift in Sources */,
 				C4C5504B235792120074DBF1 /* MovieDetailView.swift in Sources */,
 				C4C5504723577F470074DBF1 /* MovieDetailController.swift in Sources */,
 				C47384D42357CFF70028650F /* ActivityIndicator.swift in Sources */,

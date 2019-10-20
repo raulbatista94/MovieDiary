@@ -16,7 +16,8 @@ class Router {
     init(window: UIWindow, dependencies: Dependencies) {
         self.window = window
         self.dependencies = dependencies
-
+        
+        self.dependencies.movieService.getGenres()
         entryPoint()
     }
     
@@ -27,7 +28,7 @@ class Router {
     }
     
     func movieDetail(movie: Movie, from controller: UINavigationController) {
-        let movieDetailViewModel = MovieDetailViewModel(movie: movie)
+        let movieDetailViewModel = MovieDetailViewModel(movieListDependencies: dependencies, movie: movie)
         let movieDetailController = MovieDetailController(movieDetailViewModel: movieDetailViewModel, router: self)
         controller.pushViewController(movieDetailController, animated: false)
     }

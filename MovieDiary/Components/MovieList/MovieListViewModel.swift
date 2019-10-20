@@ -10,12 +10,6 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-protocol MovieListDependencies {
-    var movieService: MovieService { get }
-}
-
-extension Dependencies: MovieListDependencies { }
-
 final class MovieListViewModel {
     struct DataSource {
         let movieList = BehaviorRelay<[Movie]>(value: [])

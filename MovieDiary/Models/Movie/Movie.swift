@@ -14,4 +14,5 @@ struct Movie {
     let cellImagePath: String
     let averageScore: Double
     let overview: String
+    let genres: [String]
 }
