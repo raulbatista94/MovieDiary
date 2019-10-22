@@ -33,6 +33,10 @@ class MovieListController: UITableViewController {
         bind()
     }
     
+    override var prefersStatusBarHidden: Bool {
+        return false
+    }
+    
     func bind() {
         movieListViewModel.dataSource.movieList
             .retry()

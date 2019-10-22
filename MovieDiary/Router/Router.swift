@@ -17,7 +17,6 @@ class Router {
         self.window = window
         self.dependencies = dependencies
         
-        self.dependencies.movieService.getGenres()
         entryPoint()
     }
     

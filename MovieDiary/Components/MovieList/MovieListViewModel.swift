@@ -27,7 +27,7 @@ final class MovieListViewModel {
         self.dependencies = dependencies
 
     }
-
+    
     func loadMovies() {
         dependencies.movieService.observeMovies(previouslyLoadedMovies: dataSource.movieList.value)
             .retry(3)

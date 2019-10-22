@@ -18,7 +18,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
-        router = Router(window: window!, dependencies: Dependencies())
+        let dependencies = Dependencies()
+        dependencies.movieService.getGenres()
+        router = Router(window: window!, dependencies: dependencies)
         
         IQKeyboardManager.shared().isEnabled = true
         IQKeyboardManager.shared().enabledTouchResignedClasses.add(MovieListController.self)

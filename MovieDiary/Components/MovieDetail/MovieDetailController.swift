@@ -24,6 +24,10 @@ final class MovieDetailController: BaseViewController<MovieDetailView> {
         bind()
     }
     
+    override var prefersStatusBarHidden: Bool {
+        return false
+    }
+    
     private func bind() {
         movieDetailViewModel.dataSource.movie
             .subscribe(onNext: { [weak self] movie in
@@ -50,9 +54,9 @@ final class MovieDetailController: BaseViewController<MovieDetailView> {
         navigationController?.navigationBar.titleTextAttributes = textAttributes
     }
     
-//    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-//        contentView.adjustViewConstraints()
-//    }
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        contentView.adjustViewConstraints()
+    }
     
     private func playVideo() {
         guard let movieTrailerID = movieDetailViewModel.dataSource.movieTrailerID.value else {
