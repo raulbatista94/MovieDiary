@@ -26,8 +26,8 @@ class Router {
         window.rootViewController = controller
     }
     
-    func movieDetail(movie: Movie, from controller: UINavigationController) {
-        let movieDetailViewModel = MovieDetailViewModel(movieListDependencies: dependencies, movie: movie)
+    func movieDetail(movieId: Int, from controller: UINavigationController) {
+        let movieDetailViewModel = MovieDetailViewModel(movieListDependencies: dependencies, movieId: movieId)
         let movieDetailController = MovieDetailController(movieDetailViewModel: movieDetailViewModel, router: self)
         controller.pushViewController(movieDetailController, animated: false)
     }

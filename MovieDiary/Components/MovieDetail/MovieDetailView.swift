@@ -17,10 +17,14 @@ final class MovieDetailView: BaseView {
     let scrollView = UIScrollView()
     let genresLabel = UILabel()
     let contentView = UIView()
+    let loadingView = UIView()
+    let activityIndicator = UIActivityIndicatorView(style: .whiteLarge)
     
     
     override func prepareSubviews() {
         addSubview(scrollView)
+        addSubview(loadingView)
+        loadingView.addSubview(activityIndicator)
         scrollView.addSubview(contentView)
         contentView.addSubview(movieTitleLabel)
         contentView.addSubview(movieImagePoster)
@@ -41,6 +45,12 @@ final class MovieDetailView: BaseView {
         movieTitleLabel.textAlignment = .center
         movieTitleLabel.adjustsFontSizeToFitWidth = true
         
+        loadingView.backgroundColor = UIColor().fromRGB(rgb: 0x666666, alpha: 0.5)
+        loadingView.layer.cornerRadius = 10
+        loadingView.clipsToBounds = true
+        
+        activityIndicator.hidesWhenStopped = true
+        
         contentView.backgroundColor = .black
         
         genresTitleLabel.text = "Genres:"
@@ -53,7 +63,7 @@ final class MovieDetailView: BaseView {
         playButton.setTitleColor(.white, for: .normal)
         playButton.layer.cornerRadius = 4
         playButton.clipsToBounds = true
-        playButton.backgroundColor = UIColor().fromRGB(rgb: 0xa31c37)
+        playButton.backgroundColor = UIColor().fromRGB(rgb: 0xa31c37, alpha: 1)
     }
     
     func adjustViewConstraints() {
@@ -160,6 +170,15 @@ final class MovieDetailView: BaseView {
     }
     
     override func setupViewConstraints() {
+        loadingView.snp.makeConstraints  { make in
+            make.center.equalToSuperview()
+            make.size.equalTo(100)
+        }
+        
+        activityIndicator.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+        }
+        
         if UIDevice.current.orientation.isLandscape || UIDevice.current.orientation.isFlat {
             scrollView.snp.makeConstraints { make in
                 make.edges.equalToSuperview()

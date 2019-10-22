@@ -8,6 +8,6 @@
 
 struct MovieList {
     let page: Int
-    let movieResults: [Movie]
+    let movieResults: [MovieCellItem]
     let totalPages: Int
 }

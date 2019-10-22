@@ -24,7 +24,9 @@ enum MovieServiceError: LocalizedError {
 final class MovieService {
     // If possible get rid of this
     private var moviePage: Int = 1
-        
+    private let jsonDecoder = JSONDecoder()
+    
+    /// Used to retrieve movie list from specified page by sending request to API.
     private func getPopularMovies() -> Observable<MovieList> {
         return Observable.create { emitter in
             request(Constants.baseApiUrlString + "popular",
@@ -35,13 +37,12 @@ final class MovieService {
                     if let error = response.error {
                         emitter.onError(error)
                     } else if let data = response.data,
-                        let movieListDTO = try? JSONDecoder().decode(MovieListDTO.self, from: data) {
-                        // Increase the page to load next page
+                        let movieListDTO = try? self.jsonDecoder.decode(MovieListDTO.self, from: data) {
+                        // Increase the page to load next page. FIXME: Maybe there is a better way to do this (ex. sending MovieList to MovieListController and work with the whole model instead of just the array of movies.)
                         self.moviePage = (movieListDTO.page ?? 0) + 1
                         return emitter.onNext(self.movieList(from: movieListDTO))
                     } else {
                         assertionFailure("Failed to parse data. Check if all the keys and data types are correctly set.")
-                        
                     }
                 })
             return Disposables.create()
@@ -51,16 +52,16 @@ final class MovieService {
     
     /// Function used to retrieve YouTube video id. In case that we will use other parameters of the MovieDTO ensure that this function does not return just `String` type but the whole `MovieTrailer` to make available all the other attributes.
     /// - Parameter movie: Should be of type `Movie`. Please ensure that movie which is passed as argument to this function has valid id. Otherwise the function will fail.
-    func getTrailerYoutTubeID(for movie: Movie) -> Single<String> {
+    func getTrailerYoutTubeID(for movieId: Int) -> Single<String> {
         return Single.create { emitter in
-            request(Constants.baseApiUrlString + "\(movie.id)" + "/videos",
+            request(Constants.baseApiUrlString + String(movieId) + "/videos",
                     method: .get,
                     parameters: ["api_key": Constants.apiKey])
                 .responseJSON(completionHandler: { response in
                     if let error = response.error {
                         emitter(.error(error))
                     } else if let data = response.data,
-                        let movieTrailersContainerDTO = try? JSONDecoder().decode(MovieTrailersContainerDTO.self, from: data) {
+                        let movieTrailersContainerDTO = try? self.jsonDecoder.decode(MovieTrailersContainerDTO.self, from: data) {
                         emitter(.success(movieTrailersContainerDTO.results.first.map { self.movieTrailer(from: $0)}?.trailerYouTubeID ?? ""))
                     } else {
                         assertionFailure("Failed to parse data. Check if all the keys and data types are correctly set.")
@@ -71,26 +72,29 @@ final class MovieService {
         }
     }
     
-    func getGenres() {
-        request(Constants.genresUrl,
-                method: .get,
-                parameters: ["api_key": Constants.apiKey])
-            .responseJSON { response in
-                if let error = response.error {
-                    errorIndicator.onNext(error.localizedDescription)
-                } else if let data = response.data,
-                    let genresContainer = try? JSONDecoder().decode(MovieGenresContainer.self, from: data) {
-                    Constants.genres = genresContainer.genres.map { self.genre(from: $0) }
-                } else {
-                    assertionFailure("Failed to parse data. Check if all the keys and data types are correctly set.")
-                }
+    func getDetailForMovie(with id: Int) -> Single<MovieDetail> {
+        return Single.create { emitter in
+            request(Constants.baseApiUrlString + String(id),
+                    method: .get,
+                    parameters: ["api_key": Constants.apiKey])
+                .responseJSON { response in
+                    if let error = response.error {
+                        emitter(.error(error))
+                    } else if let data = response.data ,
+                        let movieDetailDTO = try? self.jsonDecoder.decode(MovieDetailDTO.self, from: data) {
+                        emitter(.success(self.movieDetail(from: movieDetailDTO)))
+                    } else {
+                        assertionFailure("Failed to parse data. Check if all the keys and types are correctly set.")
+                    }
+            }
+            return Disposables.create()
         }
     }
     
-    func observeMovies(previouslyLoadedMovies: [Movie]) -> Observable<[Movie]> {
+    func observeMovies(previouslyLoadedMovies: [MovieCellItem]) -> Observable<[MovieCellItem]> {
         getPopularMovies()
             .debounce(.milliseconds(200), scheduler: MainScheduler.instance)
-            .flatMapLatest { movieListDTO -> Observable<[Movie]> in
+            .flatMapLatest { movieListDTO -> Observable<[MovieCellItem]> in
                 return .just(previouslyLoadedMovies + movieListDTO.movieResults)
         }
     }
@@ -99,28 +103,32 @@ final class MovieService {
         return MovieTrailer(id: movieTrailerDTO.id, trailerYouTubeID: movieTrailerDTO.trailerYouTubeID, name: movieTrailerDTO.name, site: movieTrailerDTO.site, size: movieTrailerDTO.size)
     }
     
+    private func movieDetail(from movieDetailDTO: MovieDetailDTO) -> MovieDetail {
+        return MovieDetail(
+            id: movieDetailDTO.id, title:
+            movieDetailDTO.title,
+            posterPath: movieDetailDTO.posterPath,
+            cellImagePath: movieDetailDTO.cellImagePath,
+            averageScore: movieDetailDTO.averageScore,
+            overview: movieDetailDTO.overview,
+            genres: movieDetailDTO.genres.map { $0.name },
+            releaseDate: movieDetailDTO.releaseDate,
+            duration: movieDetailDTO.duration ?? 0)
+    }
+    
     private func movieList(from movieListDTO: MovieListDTO) -> MovieList {
         return MovieList(page: movieListDTO.page ?? 0,
                          movieResults: movieListDTO.results.map { self.movie(from: $0) },
                          totalPages: movieListDTO.totalPages ?? 0)
     }
     
-    private func genre(from genreDTO: MovieGenreDTO) -> MovieGenre {
-        return MovieGenre(id: genreDTO.id, name: genreDTO.name)
-    }
     
-    private func getGenre(by id: Int) -> String {
-        return Constants.genres.first { $0.id == id }?.name ?? ""
-    }
-    
-    private func movie(from movieDTO: MovieDTO) -> Movie {
-        return Movie(
+    private func movie(from movieDTO: MovieCellDTO) -> MovieCellItem {
+        return MovieCellItem(
             id: movieDTO.id,
             title: movieDTO.title,
             posterPath: movieDTO.posterPath,
             cellImagePath: movieDTO.cellImagePath ?? movieDTO.posterPath, // This is intentional to avoid empty cell images.
-            averageScore: movieDTO.averageScore,
-            overview: movieDTO.overview,
-            genres: movieDTO.genreIds.map { self.getGenre(by: $0) })
+            averageScore: movieDTO.averageScore)
     }
 }

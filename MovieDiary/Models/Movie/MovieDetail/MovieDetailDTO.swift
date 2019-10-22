@@ -1,20 +1,22 @@
 //
-//  MovieDTO.swift
+//  MovieDetailDTO.swift
 //  MovieDiary
 //
-//  Created by Raul on 09/10/2019.
+//  Created by Raul on 22/10/2019.
 //  Copyright © 2019 Raul. All rights reserved.
 //
 
-
-struct MovieDTO: Decodable {
+import Foundation
+struct MovieDetailDTO: Decodable {
     let id: Int
     let title: String
     let posterPath: String
     let cellImagePath: String?
     let averageScore: Double
     let overview: String
-    let genreIds: [Int]
+    let genres: [MovieGenreDTO]
+    let releaseDate: String
+    let duration: Int?
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -22,8 +24,10 @@ struct MovieDTO: Decodable {
         case posterPath = "poster_path"
         case cellImagePath = "backdrop_path"
         case averageScore = "vote_average"
-        case overview = "overview"
-        case genreIds = "genre_ids"
+        case overview
+        case genres
+        case releaseDate = "release_date"
+        case duration = "runtime"
     }
 
     init(from decoder: Decoder) throws {
@@ -34,6 +38,8 @@ struct MovieDTO: Decodable {
         self.cellImagePath = try? container.decode(String.self, forKey: .cellImagePath)
         self.averageScore = try container.decode(Double.self, forKey: .averageScore)
         self.overview = try container.decode(String.self, forKey: .overview)
-        self.genreIds = try container.decode([Int].self, forKey: .genreIds)
+        self.genres = try container.decode([MovieGenreDTO].self, forKey: .genres)
+        self.releaseDate = try container.decode(String.self, forKey: .releaseDate)
+        self.duration = try container.decode(Int.self, forKey: .duration)
     }
 }

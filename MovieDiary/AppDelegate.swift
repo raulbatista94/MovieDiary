@@ -19,7 +19,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
         let dependencies = Dependencies()
-        dependencies.movieService.getGenres()
         router = Router(window: window!, dependencies: dependencies)
         
         IQKeyboardManager.shared().isEnabled = true

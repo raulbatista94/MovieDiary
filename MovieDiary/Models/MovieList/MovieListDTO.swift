@@ -8,7 +8,7 @@
 
 struct MovieListDTO: Decodable {
     let page: Int?
-    let results: [MovieDTO]
+    let results: [MovieCellDTO]
     let totalPages: Int?
     
     enum CodingKeys: String, CodingKey {
@@ -20,7 +20,7 @@ struct MovieListDTO: Decodable {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.page = try container.decode(Int.self, forKey: .page)
-        self.results = try container.decode([MovieDTO].self, forKey: .results)
+        self.results = try container.decode([MovieCellDTO].self, forKey: .results)
         self.totalPages = try container.decode(Int.self, forKey: .totalPages)
     }
 }

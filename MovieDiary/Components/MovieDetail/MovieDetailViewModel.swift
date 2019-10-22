@@ -12,31 +12,37 @@ import RxCocoa
 
 final class MovieDetailViewModel {
     struct DataSource {
-        let movie = BehaviorRelay<Movie?>(value: nil)
+        let movie = BehaviorRelay<MovieDetail?>(value: nil)
         let movieTrailerID = BehaviorRelay<String?>(value: nil)
     }
     
     let dataSource: DataSource
-    private let movie: Movie
+    private let movieId: Int
     private let disposeBag = DisposeBag()
     private let movieListDependencies: MovieListDependencies
     
-    init(movieListDependencies: MovieListDependencies, movie: Movie) {
+    init(movieListDependencies: MovieListDependencies, movieId: Int) {
         self.dataSource = DataSource()
-        self.movie = movie
+        self.movieId = movieId
         self.movieListDependencies = movieListDependencies
         
         setup()
     }
     
     private func setup() {
-        dataSource.movie.accept(movie)
-        movieListDependencies.movieService.getTrailerYoutTubeID(for: movie)
-            .subscribe(onSuccess: { [weak self] movieID in
-                self?.dataSource.movieTrailerID.accept(movieID)
-            }, onError: { error in
-                errorIndicator.onNext(error.localizedDescription)
-            })
-            .disposed(by: disposeBag)
+        movieListDependencies.movieService.getDetailForMovie(with: movieId)
+        .flatMap { [weak self] movieDetail -> Single<(movieDetail: MovieDetail, trailerID: String)> in
+            guard let self = self else { return .never() }
+            return self.movieListDependencies.movieService.getTrailerYoutTubeID(for: self.movieId)
+                .map { trailerID -> (movieDetail: MovieDetail, trailerID: String) in
+                    return (movieDetail, trailerID)
+                }
+        }
+        .subscribe(onSuccess: { [weak self] movieDetail, trailerId in
+            guard let self = self else { return }
+            self.dataSource.movie.accept(movieDetail)
+            self.dataSource.movieTrailerID.accept(trailerId)
+            
+        }).disposed(by: disposeBag)
     }
 }

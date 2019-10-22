@@ -21,6 +21,7 @@ final class MovieDetailController: BaseViewController<MovieDetailView> {
         self.router = router
     
         super.init(title: movieDetailViewModel.dataSource.movie.value?.title)
+        contentView.activityIndicator.startAnimating()
         bind()
     }
     
@@ -32,12 +33,14 @@ final class MovieDetailController: BaseViewController<MovieDetailView> {
         movieDetailViewModel.dataSource.movie
             .subscribe(onNext: { [weak self] movie in
                 guard let self = self,
-                    let movie = movie else { return }
+                let movie = movie else { return }
                 let imageUrl = Constants.baseImagesUrlString + movie.posterPath
                 self.contentView.movieImagePoster.kf.setImage(with: URL(string: imageUrl))
                 self.contentView.movieDescriptionLabel.text = movie.overview
                 self.contentView.movieTitleLabel.text = movie.title
                 self.contentView.genresLabel.text = movie.genres.joined(separator: ", ")
+                self.contentView.activityIndicator.stopAnimating()
+                self.contentView.loadingView.isHidden = true
                 
             }).disposed(by: disposeBag)
         

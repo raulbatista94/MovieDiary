@@ -12,11 +12,11 @@ import RxCocoa
 
 final class MovieListViewModel {
     struct DataSource {
-        let movieList = BehaviorRelay<[Movie]>(value: [])
+        let movieList = BehaviorRelay<[MovieCellItem]>(value: [])
     }
 
     /// This variable is used for search and filtering since we are filtering only from already loaded movies.
-    var loadedMovies: [Movie] = []
+    var loadedMovies: [MovieCellItem] = []
     let dataSource: DataSource
     let dependencies: MovieListDependencies
 
