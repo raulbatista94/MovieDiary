@@ -22,7 +22,7 @@ enum MovieServiceError: LocalizedError {
 }
 
 final class MovieService {
-    // If possible get rid of this
+    // If possible get rid of this not sure if is the best way to check current page of API
     private var moviePage: Int = 1
     private let jsonDecoder = JSONDecoder()
     

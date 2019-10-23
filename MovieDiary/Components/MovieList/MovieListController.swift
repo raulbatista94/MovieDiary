@@ -123,8 +123,9 @@ class MovieListController: UITableViewController {
         cell.movieTitle.text = self.movieListViewModel.dataSource.movieList.value[indexPath.row].title
         cell.averageScoreLabel.text = String(self.movieListViewModel.dataSource.movieList.value[indexPath.row].averageScore)
         let imageUrl = Constants.baseImagesUrlString + self.movieListViewModel.dataSource.movieList.value[indexPath.row].cellImagePath
-
-        cell.movieImage.kf.setImage(with: URL(string: imageUrl), placeholder: nil)
+        
+        cell.movieImage.kf.indicatorType = .activity
+        cell.movieImage.kf.setImage(with: URL(string: imageUrl), placeholder: nil, options: [.fromMemoryCacheOrRefresh])
         activityIndicator.stopAnimating()
         return cell
     }

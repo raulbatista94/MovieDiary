@@ -8,6 +8,7 @@
 
 import UIKit
 import IQKeyboardManager
+import Kingfisher
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -20,6 +21,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
         let dependencies = Dependencies()
         router = Router(window: window!, dependencies: dependencies)
+        
+
+        // Make Kingfisher and only cache to disk and never use the RAM memory to prevent crashes in extreme cases.
+        ImageCache.default.maxMemoryCost = 1
         
         IQKeyboardManager.shared().isEnabled = true
         IQKeyboardManager.shared().enabledTouchResignedClasses.add(MovieListController.self)

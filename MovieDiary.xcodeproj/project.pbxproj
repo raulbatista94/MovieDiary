@@ -19,6 +19,7 @@
 		C43C0E28235CAA5500D5CD86 /* UIColor+RGB.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43C0E27235CAA5500D5CD86 /* UIColor+RGB.swift */; };
 		C43C0E2B235CB7A600D5CD86 /* MovieGenreDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43C0E2A235CB7A600D5CD86 /* MovieGenreDTO.swift */; };
 		C43C0E2D235CB84C00D5CD86 /* MovieGenre.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43C0E2C235CB84C00D5CD86 /* MovieGenre.swift */; };
+		C46210F42360FCDD00F904E9 /* NSMutableAttributedString + Combination.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46210F32360FCDD00F904E9 /* NSMutableAttributedString + Combination.swift */; };
 		C47384D42357CFF70028650F /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47384D32357CFF70028650F /* ActivityIndicator.swift */; };
 		C494FC9D234F4508007910F1 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C494FC9C234F4508007910F1 /* Constants.swift */; };
 		C494FCA1234F5480007910F1 /* MovieListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C494FCA0234F5480007910F1 /* MovieListController.swift */; };
@@ -76,6 +77,7 @@
 		C43C0E27235CAA5500D5CD86 /* UIColor+RGB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+RGB.swift"; sourceTree = "<group>"; };
 		C43C0E2A235CB7A600D5CD86 /* MovieGenreDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieGenreDTO.swift; sourceTree = "<group>"; };
 		C43C0E2C235CB84C00D5CD86 /* MovieGenre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieGenre.swift; sourceTree = "<group>"; };
+		C46210F32360FCDD00F904E9 /* NSMutableAttributedString + Combination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSMutableAttributedString + Combination.swift"; sourceTree = "<group>"; };
 		C47384D32357CFF70028650F /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
 		C494FC9C234F4508007910F1 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		C494FCA0234F5480007910F1 /* MovieListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListController.swift; sourceTree = "<group>"; };
@@ -187,6 +189,7 @@
 				C494FCA5234F5661007910F1 /* BaseView.swift */,
 				C47384D32357CFF70028650F /* ActivityIndicator.swift */,
 				C43C0E27235CAA5500D5CD86 /* UIColor+RGB.swift */,
+				C46210F32360FCDD00F904E9 /* NSMutableAttributedString + Combination.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -571,6 +574,7 @@
 				C4F28A5823521E49000FF1A8 /* Dependencies.swift in Sources */,
 				C4E21240234E5A4C00553E71 /* MovieService.swift in Sources */,
 				C4123902235FA6C600F030BD /* MovieCellItem.swift in Sources */,
+				C46210F42360FCDD00F904E9 /* NSMutableAttributedString + Combination.swift in Sources */,
 				C4E2123B234E58B200553E71 /* MovieCellDTO.swift in Sources */,
 				C4E21237234E4F4800553E71 /* Router.swift in Sources */,
 				C494FCA6234F5661007910F1 /* BaseView.swift in Sources */,

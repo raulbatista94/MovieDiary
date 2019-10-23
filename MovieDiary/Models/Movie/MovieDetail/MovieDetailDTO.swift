@@ -40,6 +40,6 @@ struct MovieDetailDTO: Decodable {
         self.overview = try container.decode(String.self, forKey: .overview)
         self.genres = try container.decode([MovieGenreDTO].self, forKey: .genres)
         self.releaseDate = try container.decode(String.self, forKey: .releaseDate)
-        self.duration = try container.decode(Int.self, forKey: .duration)
+        self.duration = try? container.decode(Int.self, forKey: .duration)
     }
 }

@@ -35,12 +35,26 @@ final class MovieDetailController: BaseViewController<MovieDetailView> {
                 guard let self = self,
                 let movie = movie else { return }
                 let imageUrl = Constants.baseImagesUrlString + movie.posterPath
+                let boldAttr: [NSAttributedString.Key: Any] = [
+                    .font: UIFont.boldSystemFont(ofSize: 15),
+                    .foregroundColor: UIColor.white,
+                ]
+                
+                let normalAttr: [NSAttributedString.Key: Any] = [
+                    .font: UIFont.systemFont(ofSize: 15),
+                    .foregroundColor: UIColor.white,
+                ]
+
                 self.contentView.movieImagePoster.kf.setImage(with: URL(string: imageUrl))
                 self.contentView.movieDescriptionLabel.text = movie.overview
                 self.contentView.movieTitleLabel.text = movie.title
-                self.contentView.genresLabel.text = movie.genres.joined(separator: ", ")
+                self.contentView.genresLabel.attributedText = NSMutableAttributedString(string: "Genres: ", attributes: boldAttr) + NSAttributedString(string: "\(movie.genres.joined(separator: ", "))", attributes: normalAttr)
                 self.contentView.activityIndicator.stopAnimating()
                 self.contentView.loadingView.isHidden = true
+                self.contentView.durationLabel.attributedText = NSMutableAttributedString(string: "Duration: ", attributes: boldAttr) + NSAttributedString(string: "\(movie.duration) min", attributes: normalAttr)
+                self.contentView.averageScoreLabel.attributedText = NSMutableAttributedString(string: "Score: ", attributes: boldAttr) + NSAttributedString(string: "\(movie.averageScore) / 10", attributes: normalAttr)
+                // Maybe it would be good to format this date. Right now is received in "YYYY-MM-DD"
+                self.contentView.releaseDateLabel.attributedText = NSMutableAttributedString(string: "Release date: ", attributes: boldAttr) + NSAttributedString(string: movie.releaseDate, attributes: normalAttr)
                 
             }).disposed(by: disposeBag)
         

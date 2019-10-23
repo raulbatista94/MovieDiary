@@ -7,10 +7,14 @@
 //
 
 import XCTest
+import RxSwift
+
 @testable import MovieDiary
 
 class MovieDiaryTests: XCTestCase {
-
+    
+    private let dependencies = Dependencies()
+    private let disposeBag = DisposeBag()
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
@@ -20,8 +24,10 @@ class MovieDiaryTests: XCTestCase {
     }
 
     func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        dependencies.movieService.observeMovies(previouslyLoadedMovies: [])
+            .subscribe(onNext: { movies in
+                XCTAssertEqual(movies.isEmpty, false)
+            }).disposed(by: disposeBag)
     }
 
     func testPerformanceExample() {

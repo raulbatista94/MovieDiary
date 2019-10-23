@@ -20,7 +20,7 @@ struct MovieCellDTO: Decodable {
         case posterPath = "poster_path"
         case cellImagePath = "backdrop_path"
         case averageScore = "vote_average"
-        case overview = "overview"
+        case overview
     }
 
     init(from decoder: Decoder) throws {
