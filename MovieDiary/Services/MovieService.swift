@@ -92,7 +92,7 @@ final class MovieService {
     }
     
     func observeMovies(previouslyLoadedMovies: [MovieCellItem]) -> Observable<[MovieCellItem]> {
-        getPopularMovies()
+        return getPopularMovies()
             .debounce(.milliseconds(200), scheduler: MainScheduler.instance)
             .flatMapLatest { movieListDTO -> Observable<[MovieCellItem]> in
                 return .just(previouslyLoadedMovies + movieListDTO.movieResults)
